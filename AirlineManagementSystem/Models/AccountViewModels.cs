@@ -46,6 +46,13 @@ namespace AirlineManagementSystem.Models
         public string Email { get; set; }
     }
 
+    public class RegisterRoleModel
+    {
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+    }
+
     public class LoginViewModel
     {
         [Required]

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AirlineManagementSystem.Models.Companies>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Companies</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href='@Url.Action("Create", "Company")' class="btn btn-success">Register</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Name)
+            @*@Html.DisplayNameFor(model => model.Name)*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.Country)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(Model => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(Model => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(Model => item.Country)
+        </td>
+        <td>
+
+            @*<a href='@Url.Action("Edit", "Company")' class="btn btn-success" id="@item.Id">Edit</a>
+            <a href='@Url.Action("Details", "Company")' class="btn btn-success" id="@item.Id">Details</a>
+            <a href='@Url.Action("Delete", "Company")' class="btn btn-success" id="@item.Id">Delete</a>*@
+
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) | 
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
