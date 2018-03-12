@@ -13,27 +13,36 @@ namespace AirlineManagementSystem.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Companies
+    public partial class Flights
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Companies()
-        {
-            this.Flights = new HashSet<Flights>();
-        }
-    
+        public int FlightId { get; set; }
+
+        [Display(Name = "Flight No.")]
+        public string Flight_Nr { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
+
+        [Display(Name = "Arrive Time")]
+        public Nullable<System.DateTime> ArriveTime { get; set; }
+
+        [Display(Name = "Expected Time")]
+        public Nullable<System.DateTime> ExpectedTime { get; set; }
+
+        [Display(Name = "Status")]
+        public int StatusId { get; set; }
+
         [Display(Name = "Company")]
-        public int Id { get; set; }
-        [Display(Name = "Company")]
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Country { get; set; }
+        public int CompanyId { get; set; }
+
+        [Display(Name = "Flight Type")]
+        public string FlightType { get; set; }
         public Nullable<System.DateTime> CreatedOnDate { get; set; }
         public Nullable<System.DateTime> LastModifiedOnDate { get; set; }
         public string CreatedByUserId { get; set; }
         public string LastModifiedByUserId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Flights> Flights { get; set; }
+        public virtual Companies Companies { get; set; }
+        public virtual Statuses Statuses { get; set; }
     }
 }

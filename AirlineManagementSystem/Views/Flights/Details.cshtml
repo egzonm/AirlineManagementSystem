@@ -1,0 +1,122 @@
+﻿@model AirlineManagementSystem.Models.Flights
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Flights</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Flight_Nr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Flight_Nr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.To)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArriveTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArriveTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlightType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastModifiedOnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModifiedOnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedByUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedByUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastModifiedByUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModifiedByUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Companies.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Companies.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Statuses.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Statuses.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FlightId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

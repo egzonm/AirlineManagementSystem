@@ -13,6 +13,10 @@
         <AssociationConnector Association="dbAirlineModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="dbAirlineModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="dbAirlineModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbAirlineModel.Flights" Width="1.5" PointX="3" PointY="6.125" />
+        <EntityTypeShape EntityType="dbAirlineModel.Statuses" Width="1.5" PointX="0.75" PointY="10.875" />
+        <AssociationConnector Association="dbAirlineModel.FK_Flights_Companies" />
+        <AssociationConnector Association="dbAirlineModel.FK_Flights_Statuses" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

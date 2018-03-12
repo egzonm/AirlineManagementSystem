@@ -8,38 +8,42 @@ using System.Web;
 using System.Web.Mvc;
 using AirlineManagementSystem.Models;
 using Microsoft.AspNet.Identity;
+using AirlineManagementSystem.Repositories;
 
 namespace AirlineManagementSystem.Controllers
 {
     public class CompanyController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
-        private dbAirlineEntities db = new dbAirlineEntities();
+        //private dbAirlineEntities db = new dbAirlineEntities();
 
+        private ICompany companyRepository;
+
+        public CompanyController()
+        {
+            this.companyRepository = new CompanyRepository(new dbAirlineEntities());
+        }
 
         // GET: Company
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.Companies.ToList());
+            return View(companyRepository.GetCompany()); 
         }
 
-        //// GET: Company/Details/5
-        //public ActionResult Details(int? id)
+        // GET: Company/Details/5
+        //public ActionResult Details(int id)
         //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    CompanyViewModel companyViewModel = db.CompanyViewModels.Find(id);
-        //    if (companyViewModel == null)
+        //    Companies comp = companyRepository.GetCompaniesById(id);
+
+        //    if (comp == null)
         //    {
         //        return HttpNotFound();
         //    }
-        //    return View(companyViewModel);
+        //    return View(comp);
         //}
 
-        // GET: Company/Create
+        //GET: Company/Create
         public ActionResult Create()
         {
             return View();
@@ -52,34 +56,40 @@ namespace AirlineManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description,Country")] Companies model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                model.CreatedByUserId = User.Identity.GetUserId();
-                model.LastModifiedByUserId = User.Identity.GetUserId();
-                model.CreatedOnDate = DateTime.Now;
-                model.LastModifiedOnDate = DateTime.Now;
-                model.IsDeleted = false;
-                db.Companies.Add(model);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    model.CreatedByUserId = User.Identity.GetUserId();
+                    model.LastModifiedByUserId = User.Identity.GetUserId();
+                    model.CreatedOnDate = DateTime.Now;
+                    model.LastModifiedOnDate = DateTime.Now;
+                    model.IsDeleted = false;
+                    companyRepository.InsertCompany(model);
+                    companyRepository.Save();
+
+                    return RedirectToAction("Index");
+                }
             }
+            catch (DataException)
+            { 
+                ModelState.AddModelError(string.Empty,"Unable to save changes. Try again.");
+            }
+           
 
             return View(model);
         }
 
         // GET: Company/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Companies model = db.Companies.Find(id);
-            if (model == null)
+        public ActionResult Edit(int id)
+        { 
+            Companies companies = companyRepository.GetCompaniesById(id); 
+
+            if (companies == null)
             {
                 return HttpNotFound();
             }
-            return View(model);
+            return View(companies);
         }
 
         // POST: Company/Edit/5
@@ -89,47 +99,59 @@ namespace AirlineManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,Country")] Companies model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(model).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                { 
+                    companyRepository.UpdateCompany(model);
+                    companyRepository.Save();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (DataException)
+            {
+
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+            }
+            
             return View(model);
         }
 
-        //// GET: Company/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    CompanyViewModel companyViewModel = db.CompanyViewModels.Find(id);
-        //    if (companyViewModel == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(companyViewModel);
-        //}
+        // GET: Company/Delete/5
+        public ActionResult Delete(int id)
+        {
 
-        //// POST: Company/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    CompanyViewModel companyViewModel = db.CompanyViewModels.Find(id);
-        //    db.CompanyViewModels.Remove(companyViewModel);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+            Companies companies = companyRepository.GetCompaniesById(id);
+            if (companies == null)
+            {
+                return HttpNotFound();
+            }
+            return View(companies);
+        }
+
+        // POST: Company/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                Companies companies = companyRepository.GetCompaniesById(id);
+
+                companyRepository.DeleteCompany(id);
+                companyRepository.Save();
+            }
+            catch (DataException)
+            {
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            } 
+
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            companyRepository.Dispose();
             base.Dispose(disposing);
         }
     }

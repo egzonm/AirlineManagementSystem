@@ -1,0 +1,78 @@
+﻿@model IEnumerable<AirlineManagementSystem.Models.Flights>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Flights</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href='@Url.Action("Create", "Flights")' class="btn btn-success">Register</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Flight_Nr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Companies.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Statuses.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.From)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.To)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArriveTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FlightType)
+        </th> 
+      
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Flight_Nr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Companies.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Statuses.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.From)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.To)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArriveTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FlightType)
+        </td> 
+      
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FlightId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FlightId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FlightId })
+        </td>
+    </tr>
+}
+
+</table>

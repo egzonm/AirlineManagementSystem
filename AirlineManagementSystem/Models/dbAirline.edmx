@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbAirlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbAirlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -72,6 +72,38 @@
           <Property Name="LastModifiedByUserId" Type="nvarchar" MaxLength="128" />
           <Property Name="IsDeleted" Type="bit" />
         </EntityType>
+        <EntityType Name="Flights">
+          <Key>
+            <PropertyRef Name="FlightId" />
+          </Key>
+          <Property Name="FlightId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Flight Nr" Type="nvarchar" MaxLength="50" />
+          <Property Name="From" Type="nvarchar" MaxLength="150" />
+          <Property Name="To" Type="nvarchar" MaxLength="150" />
+          <Property Name="ArriveTime" Type="datetime" />
+          <Property Name="ExpectedTime" Type="datetime" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="FlightType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOnDate" Type="datetime" />
+          <Property Name="LastModifiedOnDate" Type="datetime" />
+          <Property Name="CreatedByUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="LastModifiedByUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedOnDate" Type="datetime" />
+          <Property Name="LastModifiedOnDate" Type="datetime" />
+          <Property Name="CreatedByUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="LastModifiedByUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -128,6 +160,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Flights_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="Flights" Type="Self.Flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flights">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flights_Statuses">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="Flights" Type="Self.Flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Flights">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dbAirlineModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -135,6 +191,8 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flights" EntityType="Self.Flights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -151,9 +209,16 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Flights_Companies" Association="Self.FK_Flights_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Flights" EntitySet="Flights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flights_Statuses" Association="Self.FK_Flights_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Flights" EntitySet="Flights" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbAirlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -221,6 +286,7 @@
           <Property Name="CreatedByUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="LastModifiedByUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Flights" Relationship="dbAirlineModel.FK_Flights_Companies" FromRole="Companies" ToRole="Flights" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -272,7 +338,76 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Flights" EntityType="dbAirlineModel.Flights" />
+          <EntitySet Name="Statuses" EntityType="dbAirlineModel.Statuses" />
+          <AssociationSet Name="FK_Flights_Companies" Association="dbAirlineModel.FK_Flights_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Flights" EntitySet="Flights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flights_Statuses" Association="dbAirlineModel.FK_Flights_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Flights" EntitySet="Flights" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Flights">
+          <Key>
+            <PropertyRef Name="FlightId" />
+          </Key>
+          <Property Name="FlightId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Flight_Nr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="From" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="To" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ArriveTime" Type="DateTime" Precision="3" />
+          <Property Name="ExpectedTime" Type="DateTime" Precision="3" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="FlightType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOnDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedOnDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedByUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedByUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Companies" Relationship="dbAirlineModel.FK_Flights_Companies" FromRole="Flights" ToRole="Companies" />
+          <NavigationProperty Name="Statuses" Relationship="dbAirlineModel.FK_Flights_Statuses" FromRole="Flights" ToRole="Statuses" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOnDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedOnDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedByUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedByUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Flights" Relationship="dbAirlineModel.FK_Flights_Statuses" FromRole="Statuses" ToRole="Flights" />
+        </EntityType>
+        <Association Name="FK_Flights_Companies">
+          <End Type="dbAirlineModel.Companies" Role="Companies" Multiplicity="1" />
+          <End Type="dbAirlineModel.Flights" Role="Flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Flights">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flights_Statuses">
+          <End Type="dbAirlineModel.Statuses" Role="Statuses" Multiplicity="1" />
+          <End Type="dbAirlineModel.Flights" Role="Flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Flights">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -349,6 +484,40 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Flights">
+            <EntityTypeMapping TypeName="dbAirlineModel.Flights">
+              <MappingFragment StoreEntitySet="Flights">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastModifiedByUserId" ColumnName="LastModifiedByUserId" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="LastModifiedOnDate" ColumnName="LastModifiedOnDate" />
+                <ScalarProperty Name="CreatedOnDate" ColumnName="CreatedOnDate" />
+                <ScalarProperty Name="FlightType" ColumnName="FlightType" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="ExpectedTime" ColumnName="ExpectedTime" />
+                <ScalarProperty Name="ArriveTime" ColumnName="ArriveTime" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="Flight_Nr" ColumnName="Flight Nr" />
+                <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="dbAirlineModel.Statuses">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastModifiedByUserId" ColumnName="LastModifiedByUserId" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="LastModifiedOnDate" ColumnName="LastModifiedOnDate" />
+                <ScalarProperty Name="CreatedOnDate" ColumnName="CreatedOnDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

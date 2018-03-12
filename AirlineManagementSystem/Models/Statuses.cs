@@ -13,20 +13,20 @@ namespace AirlineManagementSystem.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Companies
+    public partial class Statuses
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Companies()
+        public Statuses()
         {
             this.Flights = new HashSet<Flights>();
         }
-    
-        [Display(Name = "Company")]
-        public int Id { get; set; }
-        [Display(Name = "Company")]
+
+        [Display(Name = "Status")]
+        public int StatusId { get; set; }
+
+        [Display(Name = "Status")]
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Country { get; set; }
         public Nullable<System.DateTime> CreatedOnDate { get; set; }
         public Nullable<System.DateTime> LastModifiedOnDate { get; set; }
         public string CreatedByUserId { get; set; }
