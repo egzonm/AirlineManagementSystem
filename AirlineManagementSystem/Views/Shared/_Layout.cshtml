@@ -26,10 +26,11 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     { 
-                        <li>@Html.ActionLink("Company", "Index", "Company")</li>
+                        <li>@Html.ActionLink("Companies", "Index", "Company")</li>
 
-                        <li>@Html.ActionLink("Flights", "Index", "Flights")</li>
+                        
                     }
+                    <li>@Html.ActionLink("Flights", "Index", "Flights")</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")

@@ -102,7 +102,9 @@ namespace AirlineManagementSystem.Controllers
             try
             {
                 if (ModelState.IsValid)
-                { 
+                {
+                    model.LastModifiedByUserId = User.Identity.GetUserId();
+                    model.LastModifiedOnDate = DateTime.Now;
                     companyRepository.UpdateCompany(model);
                     companyRepository.Save();
                     return RedirectToAction("Index");

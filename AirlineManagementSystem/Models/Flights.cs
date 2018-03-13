@@ -9,12 +9,14 @@
 
 namespace AirlineManagementSystem.Models
 {
+    using AirlineManagementSystem.Enum;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Flights
     {
+        
         public int FlightId { get; set; }
 
         [Display(Name = "Flight No.")]
@@ -41,6 +43,8 @@ namespace AirlineManagementSystem.Models
         public string CreatedByUserId { get; set; }
         public string LastModifiedByUserId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+
+        //public Cities cities { get; set; }
     
         public virtual Companies Companies { get; set; }
         public virtual Statuses Statuses { get; set; }

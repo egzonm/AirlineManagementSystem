@@ -196,6 +196,7 @@
     <Compile Include="Controllers\FlightsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Enum\Cities.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,7 +241,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
+    <Compile Include="Repositories\FlightRepository.cs" />
     <Compile Include="Repositories\ICompany.cs" />
+    <Compile Include="Repositories\IFlight.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

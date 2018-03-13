@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AirlineManagementSystem.Models;
+using AirlineManagementSystem.Repositories;
+using Microsoft.AspNet.Identity;
 
 namespace AirlineManagementSystem.Controllers
 {
@@ -14,27 +16,33 @@ namespace AirlineManagementSystem.Controllers
     {
         private dbAirlineEntities db = new dbAirlineEntities();
 
-        // GET: Flights
-        public ActionResult Index()
+        private IFlight flightRepository;
+
+        public FlightsController()
         {
-            var flights = db.Flights.Include(f => f.Companies).Include(f => f.Statuses);
-            return View(flights.ToList());
+            this.flightRepository =  new FlightRepository(new dbAirlineEntities());
         }
 
-        // GET: Flights/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Flights flights = db.Flights.Find(id);
-            if (flights == null)
-            {
-                return HttpNotFound();
-            }
-            return View(flights);
+        // GET: Flights
+        public ActionResult Index()
+        { 
+            return View(flightRepository.GetFlights());
         }
+
+        //// GET: Flights/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Flights flights = db.Flights.Find(id);
+        //    if (flights == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(flights);
+        //}
 
         // GET: Flights/Create
         public ActionResult Create()
@@ -49,32 +57,45 @@ namespace AirlineManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FlightId,Flight_Nr,From,To,ArriveTime,ExpectedTime,StatusId,CompanyId,FlightType,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Flights flights)
+        public ActionResult Create([Bind(Include = "Flight_Nr,From,To,ArriveTime,ExpectedTime,StatusId,CompanyId,FlightType")] Flights flights)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Flights.Add(flights);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    flights.CreatedByUserId = User.Identity.GetUserId();
+                    flights.LastModifiedByUserId = User.Identity.GetUserId();
+                    flights.CreatedOnDate = DateTime.Now;
+                    flights.LastModifiedOnDate = DateTime.Now;
+                    flights.IsDeleted = false;
+                    flightRepository.InsertFlight(flights);
+                    flightRepository.Save();
 
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException)
+            {
+
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+            }
+            
             ViewBag.CompanyId = new SelectList(db.Companies, "Id", "Name", flights.CompanyId);
             ViewBag.StatusId = new SelectList(db.Statuses, "StatusId", "Name", flights.StatusId);
             return View(flights);
         }
 
         // GET: Flights/Edit/5
-        public ActionResult Edit(int? id)
+        [Authorize]
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Flights flights = db.Flights.Find(id);
+            Flights flights = flightRepository.GetFlightById(id);
+  
             if (flights == null)
             {
                 return HttpNotFound();
             }
+
             ViewBag.CompanyId = new SelectList(db.Companies, "Id", "Name", flights.CompanyId);
             ViewBag.StatusId = new SelectList(db.Statuses, "StatusId", "Name", flights.StatusId);
             return View(flights);
@@ -85,27 +106,35 @@ namespace AirlineManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FlightId,Flight_Nr,From,To,ArriveTime,ExpectedTime,StatusId,CompanyId,FlightType,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Flights flights)
+        public ActionResult Edit([Bind(Include = "Flight_Nr,From,To,ArriveTime,ExpectedTime,StatusId,CompanyId,FlightType")] Flights flights)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(flights).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    flights.LastModifiedByUserId = User.Identity.GetUserId();
+                    flights.LastModifiedOnDate = DateTime.Now;
+                    flightRepository.UpdateFlight(flights);
+                    flightRepository.Save();
+
+                    return RedirectToAction("Index");
+                }
             }
+            catch (DataException)
+            { 
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+            }
+            
             ViewBag.CompanyId = new SelectList(db.Companies, "Id", "Name", flights.CompanyId);
             ViewBag.StatusId = new SelectList(db.Statuses, "StatusId", "Name", flights.StatusId);
             return View(flights);
         }
 
         // GET: Flights/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Flights flights = db.Flights.Find(id);
+            Flights flights = flightRepository.GetFlightById(id);
+
             if (flights == null)
             {
                 return HttpNotFound();
@@ -118,18 +147,22 @@ namespace AirlineManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Flights flights = db.Flights.Find(id);
-            db.Flights.Remove(flights);
-            db.SaveChanges();
+            try
+            {
+                Flights flights = flightRepository.GetFlightById(id);
+                flightRepository.DeleteFlight(id);
+                flightRepository.Save();
+            }
+            catch (DataException)
+            {
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            } 
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            flightRepository.Dispose();
             base.Dispose(disposing);
         }
     }
