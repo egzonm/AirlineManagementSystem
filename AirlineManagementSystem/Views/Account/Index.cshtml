@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AirlineManagementSystem.Models.AspNetUsers>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>All Users</h3>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href='@Url.Action("Register", "Account")' class="btn btn-success">Register</a>
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name) 
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.UserName)
+        </td>
+        <td>
+
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+        </td>
+    </tr>
+}
+
+</table>

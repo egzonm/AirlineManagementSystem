@@ -57,8 +57,8 @@ namespace AirlineManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Flight_Nr,From,To,ArriveTime,ExpectedTime,StatusId,CompanyId,FlightType")] Flights flights)
-        {
+        public ActionResult Create([Bind(Include = "FlightId,Flight_Nr,From,To,ArriveTime,ExpectedTime,StatusId,CompanyId,FlightType,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Flights flights)
+        { 
             try
             {
                 if (ModelState.IsValid)
@@ -106,7 +106,7 @@ namespace AirlineManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Flight_Nr,From,To,ArriveTime,ExpectedTime,StatusId,CompanyId,FlightType")] Flights flights)
+        public ActionResult Edit([Bind(Include = "FlightId,Flight_Nr,From,To,ArriveTime,ExpectedTime,StatusId,CompanyId,FlightType,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Flights flights)
         {
             try
             {

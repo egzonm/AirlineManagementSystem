@@ -11,8 +11,7 @@ namespace AirlineManagementSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Statuses
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,11 +19,8 @@ namespace AirlineManagementSystem.Models
         {
             this.Flights = new HashSet<Flights>();
         }
-
-        [Display(Name = "Status")]
+    
         public int StatusId { get; set; }
-
-        [Display(Name = "Status")]
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> CreatedOnDate { get; set; }

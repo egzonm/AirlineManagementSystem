@@ -32,5 +32,6 @@ namespace AirlineManagementSystem.Models
         public virtual DbSet<Companies> Companies { get; set; }
         public virtual DbSet<Flights> Flights { get; set; }
         public virtual DbSet<Statuses> Statuses { get; set; }
+        public virtual DbSet<Cities> Cities { get; set; }
     }
 }

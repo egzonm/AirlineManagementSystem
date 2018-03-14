@@ -25,7 +25,6 @@ namespace AirlineManagementSystem.Models
         public string Purpose { get; set; }
     }
 
-
     public class SetPasswordViewModel
     {
         [Required]

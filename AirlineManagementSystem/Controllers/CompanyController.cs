@@ -54,8 +54,8 @@ namespace AirlineManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Country")] Companies model)
-        {
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Country,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Companies model)
+        { 
             try
             {
                 if (ModelState.IsValid)
@@ -97,7 +97,7 @@ namespace AirlineManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Country")] Companies model)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Country,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Companies model)
         {
             try
             {

@@ -41,8 +41,8 @@
             <a href='@Url.Action("Details", "Company")' class="btn btn-success" id="@item.Id">Details</a>
             <a href='@Url.Action("Delete", "Company")' class="btn btn-success" id="@item.Id">Delete</a>*@
 
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) | 
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })  
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new { @class = "btn btn-danger btn-sm" })
         </td>
     </tr>
 }

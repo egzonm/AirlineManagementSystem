@@ -18,6 +18,8 @@ namespace AirlineManagementSystem.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        private dbAirlineEntities db = new dbAirlineEntities();
+
         public AccountController()
         {
         }
@@ -50,6 +52,14 @@ namespace AirlineManagementSystem.Controllers
             {
                 _userManager = value;
             }
+        }
+
+
+        // GET: Users
+        [Authorize]
+        public ActionResult Index()
+        {
+            return View(db.AspNetUsers.ToList());
         }
 
         //
@@ -156,7 +166,7 @@ namespace AirlineManagementSystem.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Name = model.Name,
-                    Surname = model.Surname
+                    Surname = model.Surnanme
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

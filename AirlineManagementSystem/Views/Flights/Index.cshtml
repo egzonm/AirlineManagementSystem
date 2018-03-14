@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>All Flights</h2>
+<h3>All Flights</h3>
 
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
@@ -72,9 +72,8 @@
         @if (User.Identity.IsAuthenticated)
         {
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.FlightId }) |
-                @*@Html.ActionLink("Details", "Details", new { id=item.FlightId }) |*@
-                @Html.ActionLink("Delete", "Delete", new { id = item.FlightId })
+              @Html.ActionLink("Edit", "Edit", new { id = item.FlightId }, new { @class = "btn btn-warning btn-sm" })  
+              @Html.ActionLink("Delete", "Delete", new { id=item.FlightId }, new { @class = "btn btn-danger btn-sm" })
             </td>
         }
         
