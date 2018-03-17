@@ -1,0 +1,69 @@
+﻿@model IEnumerable<AirlineManagementSystem.Models.Reservation>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<h3>All Reservations</h3>
+ 
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+
+        <a href='@Url.Action("Create", "Reservations")' class="btn btn-success">Register</a>
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.From)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlighType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoChildren)
+            </th> 
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.From)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlighType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoChildren)
+            </td> 
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ReservationId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ReservationId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ReservationId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+ 

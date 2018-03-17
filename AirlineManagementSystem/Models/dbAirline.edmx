@@ -105,6 +105,23 @@
           <Property Name="LastModifiedByUserId" Type="nvarchar" MaxLength="128" />
           <Property Name="IsDeleted" Type="bit" />
         </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+          </Key>
+          <Property Name="ReservationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="From" Type="nvarchar" MaxLength="150" />
+          <Property Name="Destination" Type="nvarchar" MaxLength="150" />
+          <Property Name="DateFrom" Type="date" />
+          <Property Name="DateTo" Type="date" />
+          <Property Name="FlighType" Type="int" />
+          <Property Name="NoChildren" Type="int" />
+          <Property Name="CreatedOnDate" Type="datetime" />
+          <Property Name="LastModifiedOnDate" Type="datetime" />
+          <Property Name="CreatedByUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="LastModifiedByUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
         <EntityType Name="Statuses">
           <Key>
             <PropertyRef Name="StatusId" />
@@ -207,6 +224,7 @@
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Flights" EntityType="Self.Flights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -364,6 +382,7 @@
             <End Role="Flights" EntitySet="Flights" />
           </AssociationSet>
           <EntitySet Name="Cities" EntityType="dbAirlineModel.Cities" />
+          <EntitySet Name="Reservation" EntityType="dbAirlineModel.Reservation" />
         </EntityContainer>
         <EntityType Name="Flights">
           <Key>
@@ -432,6 +451,23 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Airport_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOnDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedOnDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedByUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedByUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+          </Key>
+          <Property Name="ReservationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="From" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Destination" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DateFrom" Type="DateTime" Precision="0" />
+          <Property Name="DateTo" Type="DateTime" Precision="0" />
+          <Property Name="FlighType" Type="Int32" />
+          <Property Name="NoChildren" Type="Int32" />
           <Property Name="CreatedOnDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedOnDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedByUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -560,6 +596,24 @@
                 <ScalarProperty Name="Airport_Name" ColumnName="Airport Name" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CityId" ColumnName="CityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservation">
+            <EntityTypeMapping TypeName="dbAirlineModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastModifiedByUserId" ColumnName="LastModifiedByUserId" />
+                <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+                <ScalarProperty Name="LastModifiedOnDate" ColumnName="LastModifiedOnDate" />
+                <ScalarProperty Name="CreatedOnDate" ColumnName="CreatedOnDate" />
+                <ScalarProperty Name="NoChildren" ColumnName="NoChildren" />
+                <ScalarProperty Name="FlighType" ColumnName="FlighType" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

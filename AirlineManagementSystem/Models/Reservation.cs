@@ -12,12 +12,15 @@ namespace AirlineManagementSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cities
+    public partial class Reservation
     {
-        public int CityId { get; set; }
-        public string Name { get; set; }
-        public string Airport_Name { get; set; }
-        public string Country { get; set; }
+        public int ReservationId { get; set; }
+        public string From { get; set; }
+        public string Destination { get; set; }
+        public Nullable<System.DateTime> DateFrom { get; set; }
+        public Nullable<System.DateTime> DateTo { get; set; }
+        public Nullable<int> FlighType { get; set; }
+        public Nullable<int> NoChildren { get; set; }
         public Nullable<System.DateTime> CreatedOnDate { get; set; }
         public Nullable<System.DateTime> LastModifiedOnDate { get; set; }
         public string CreatedByUserId { get; set; }

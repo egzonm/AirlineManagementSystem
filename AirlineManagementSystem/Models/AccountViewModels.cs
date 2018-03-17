@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AirlineManagementSystem.Models
@@ -64,6 +65,8 @@ namespace AirlineManagementSystem.Models
 
     public class RegisterViewModel
     {
+        public string Id { get; set; }
+
         [Required] 
         public string Name { get; set; }
 
@@ -85,6 +88,9 @@ namespace AirlineManagementSystem.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public Nullable<System.DateTime> LastModifiedOnDate { get; set; }
+        public string LastModifiedByUserId { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AirlineManagementSystem.Models;
+using System.Data;
+using System.Data.Entity;
 
 namespace AirlineManagementSystem.Controllers
 {
@@ -60,6 +62,44 @@ namespace AirlineManagementSystem.Controllers
         public ActionResult Index()
         {
             return View(db.AspNetUsers.ToList());
+        }
+
+        // GET: Cities/Edit/5
+        public ActionResult Edit(int id)
+        { 
+            AspNetUsers user = db.AspNetUsers.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        // POST: Cities/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name,Surname,Email,UserName")] RegisterViewModel model)
+        { 
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    model.LastModifiedByUserId = User.Identity.GetUserId();
+                    model.LastModifiedOnDate = DateTime.Now;
+                    db.Entry(model).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+            }
+
+            return View(model);
         }
 
         //

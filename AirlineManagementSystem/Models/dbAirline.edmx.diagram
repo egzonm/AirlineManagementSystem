@@ -18,6 +18,7 @@
         <AssociationConnector Association="dbAirlineModel.FK_Flights_Companies" />
         <AssociationConnector Association="dbAirlineModel.FK_Flights_Statuses" />
         <EntityTypeShape EntityType="dbAirlineModel.Cities" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="dbAirlineModel.Reservation" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
