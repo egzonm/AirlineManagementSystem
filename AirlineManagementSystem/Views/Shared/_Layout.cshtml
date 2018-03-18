@@ -24,16 +24,13 @@
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                   
-                        <li>@Html.ActionLink("Companies", "Index", "Company")</li>
-
-                    <li>@Html.ActionLink("Reservation", "Index", "Reservations")</li>
-                  
-                    <li>@Html.ActionLink("Flights", "Index", "Flights")</li>
+                   <li>@Html.ActionLink("Companies", "Index", "Company")</li>
+                   <li>@Html.ActionLink("Reservation", "Index", "Reservations")</li>
+                   <li>@Html.ActionLink("Flights", "Index", "Flights")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="">
                                 Settings <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
@@ -50,8 +47,8 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Airline Management System</p>
+        <footer style="position:relative;bottom: 0;"> 
+            <p style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">&copy; @DateTime.Now.Year - Airline Management System</p>
         </footer>
     </div>
 

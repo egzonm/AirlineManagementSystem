@@ -29,10 +29,11 @@ namespace AirlineManagementSystem.Models
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Reservation> Reservation { get; set; }
+        public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<Companies> Companies { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Flights> Flights { get; set; }
         public virtual DbSet<Statuses> Statuses { get; set; }
-        public virtual DbSet<Cities> Cities { get; set; }
-        public virtual DbSet<Reservation> Reservation { get; set; }
     }
 }

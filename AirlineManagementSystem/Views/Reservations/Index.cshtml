@@ -2,20 +2,16 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reservations";
 }
-
-
-
+  
 <h3>All Reservations</h3>
- 
-    <p>
-        @*@Html.ActionLink("Create New", "Create")*@
-
+ <hr />
+    <p>  
         <a href='@Url.Action("Create", "Reservations")' class="btn btn-success">Register</a>
     </p>
-    <table class="table">
-        <tr>
+    <table class="table table-bordered table-hover">
+        <tr style="background-color:#333333; color:white;">
             <th>
                 @Html.DisplayNameFor(model => model.From)
             </th>
@@ -52,15 +48,15 @@
                 @Html.DisplayFor(modelItem => item.DateTo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FlighType)
+                @*@Html.DisplayFor(modelItem => item.FlighType)*@
+                @Html.DisplayFor(modelItem => item.FlighType, Enum.GetNames(typeof(AirlineManagementSystem.Models.FType)))
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NoChildren)
             </td> 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ReservationId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ReservationId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ReservationId })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ReservationId }, new { @class = "btn btn-warning btn-sm" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ReservationId }, new { @class = "btn btn-danger btn-sm" })
             </td>
         </tr>
     }

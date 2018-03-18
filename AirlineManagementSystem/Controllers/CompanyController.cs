@@ -15,7 +15,7 @@ namespace AirlineManagementSystem.Controllers
     public class CompanyController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
-        //private dbAirlineEntities db = new dbAirlineEntities();
+        private dbAirlineEntities db = new dbAirlineEntities();
 
         private ICompany companyRepository;
 
@@ -46,6 +46,7 @@ namespace AirlineManagementSystem.Controllers
         //GET: Company/Create
         public ActionResult Create()
         {
+            ViewBag.CountryId = new SelectList(db.Country, "CountryId", "Name");
             return View();
         }
 
@@ -54,7 +55,7 @@ namespace AirlineManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Country,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Companies model)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,CountryId,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Companies model)
         { 
             try
             {
@@ -75,7 +76,8 @@ namespace AirlineManagementSystem.Controllers
             { 
                 ModelState.AddModelError(string.Empty,"Unable to save changes. Try again.");
             }
-           
+
+            ViewBag.CountryId = new SelectList(db.Country, "CountryId", "Name");
 
             return View(model);
         }
@@ -89,6 +91,8 @@ namespace AirlineManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.CountryId = new SelectList(db.Country, "CountryId", "Name");
             return View(companies);
         }
 
@@ -97,7 +101,7 @@ namespace AirlineManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Country,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Companies model)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,CountryId,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Companies model)
         {
             try
             {
@@ -115,7 +119,8 @@ namespace AirlineManagementSystem.Controllers
 
                 ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
             }
-            
+
+            ViewBag.CountryId = new SelectList(db.Country, "CountryId", "Name");
             return View(model);
         }
 

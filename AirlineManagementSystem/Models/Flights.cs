@@ -11,17 +11,22 @@ namespace AirlineManagementSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Flights
     {
         public int FlightId { get; set; }
+        [Display(Name = "Flight Nr.")]
         public string Flight_Nr { get; set; }
         public string From { get; set; }
         public string To { get; set; }
+        [Display(Name = "Arrive Time")]
         public Nullable<System.DateTime> ArriveTime { get; set; }
+        [Display(Name = "Expected Time")]
         public Nullable<System.DateTime> ExpectedTime { get; set; }
         public int StatusId { get; set; }
         public int CompanyId { get; set; }
+        [Display(Name = "Flight Type")]
         public string FlightType { get; set; }
         public Nullable<System.DateTime> CreatedOnDate { get; set; }
         public Nullable<System.DateTime> LastModifiedOnDate { get; set; }

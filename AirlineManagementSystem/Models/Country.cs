@@ -11,18 +11,16 @@ namespace AirlineManagementSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class Statuses
+    
+    public partial class Country
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Statuses()
+        public Country()
         {
-            this.Flights = new HashSet<Flights>();
+            this.Companies = new HashSet<Companies>();
         }
     
-        public int StatusId { get; set; }
-        [Display(Name = "Status")]
+        public int CountryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> CreatedOnDate { get; set; }
@@ -32,6 +30,6 @@ namespace AirlineManagementSystem.Models
         public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Flights> Flights { get; set; }
+        public virtual ICollection<Companies> Companies { get; set; }
     }
 }

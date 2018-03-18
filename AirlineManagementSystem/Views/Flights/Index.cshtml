@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<AirlineManagementSystem.Models.Flights>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Flights";
 }
 
 <h3>All Flights</h3>
-
+<hr />
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
     <a href='@Url.Action("Create", "Flights")' class="btn btn-success">Register</a>
 </p>
-<table class="table table-bordered">
-    <tr>
+<table class="table table-bordered table-hover">
+    <tr style="background-color:#333333; color:white;">
         <th>
             @Html.DisplayNameFor(model => model.Flight_Nr)
         </th>

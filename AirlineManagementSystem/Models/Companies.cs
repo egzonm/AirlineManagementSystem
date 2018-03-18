@@ -23,13 +23,14 @@ namespace AirlineManagementSystem.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Country { get; set; }
+        public Nullable<int> CountryId { get; set; }
         public Nullable<System.DateTime> CreatedOnDate { get; set; }
         public Nullable<System.DateTime> LastModifiedOnDate { get; set; }
         public string CreatedByUserId { get; set; }
         public string LastModifiedByUserId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     
+        public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Flights> Flights { get; set; }
     }

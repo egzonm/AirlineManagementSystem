@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<AirlineManagementSystem.Models.AspNetUsers>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Users";
 }
 
 <h3>All Users</h3>
-
+<hr/>
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
     <a href='@Url.Action("Register", "Account")' class="btn btn-success">Register</a>
 </p>
 <table class="table table-bordered">
-    <tr>
+    <tr style="background-color:#333333; color:white;">
         <th>
             @Html.DisplayNameFor(model => model.Name) 
         </th>

@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<AirlineManagementSystem.Models.Companies>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Companies";
 }
 
-<h2>Companies</h2>
-
+<h3>Companies</h3>
+<hr />
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
     <a href='@Url.Action("Create", "Company")' class="btn btn-success">Register</a>
 </p>
-<table class="table table-bordered">
-    <tr>
+<table class="table table-bordered table-hover">
+    <tr style="background-color:#333333; color:white;">
         <th>
             @Html.DisplayNameFor(Model => Model.Name) 
         </th>
@@ -33,7 +33,7 @@
             @Html.DisplayFor(Model => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(Model => item.Country)
+            @Html.DisplayFor(Model => item.Country.Name)
         </td>
         <td>
 

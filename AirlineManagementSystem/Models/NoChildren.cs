@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace AirlineManagementSystem.Models
+{
+    public enum NoChildren
+    {
+        One = 1,
+        Two = 2,
+        Three = 3,
+        Four = 4
+    }
+}

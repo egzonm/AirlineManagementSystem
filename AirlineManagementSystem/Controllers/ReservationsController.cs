@@ -6,18 +6,28 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AirlineManagementSystem.Models; 
+using AirlineManagementSystem.Models;
+using AirlineManagementSystem.Repositories;
+using Microsoft.AspNet.Identity;
 
 namespace AirlineManagementSystem.Controllers
 {
     public class ReservationsController : Controller
     {
-        private dbAirlineEntities db = new dbAirlineEntities();
-          
+        //private dbAirlineEntities db = new dbAirlineEntities();
+
+        private IReservation reservationRepository;
+
+
+        public ReservationsController()
+        {
+            this.reservationRepository = new ReservationRepository(new dbAirlineEntities());
+        } 
+
         // GET: Reservations
         public ActionResult Index()
         {
-            return View(db.Reservation.ToList());
+            return View(reservationRepository.GetReservation());
         }
 
         // GET: Reservations/Details/5
@@ -48,30 +58,40 @@ namespace AirlineManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ReservationId,From,Destination,DateFrom,DateTo,FlighType,NoChildren,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Reservation reservation)
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                db.Reservation.Add(reservation);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    reservation.CreatedByUserId = User.Identity.GetUserId();
+                    reservation.CreatedOnDate = DateTime.Now;
+                    reservation.LastModifiedByUserId = User.Identity.GetUserId();
+                    reservation.LastModifiedOnDate = DateTime.Now;
+                    reservation.IsDeleted = false;
+                    reservationRepository.InsertReservation(reservation);
+                    reservationRepository.Save();
+
+                    return RedirectToAction("Index");
+                }
             }
+            catch (DataException)
+            {
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+            }
+            
 
             return View(reservation);
         }
+         
 
         // GET: Reservations/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Reservation reservation = db.Reservation.Find(id);
-            if (reservation == null)
+            Reservation res = reservationRepository.GetReservationById(id);
+            if (res == null)
             {
                 return HttpNotFound();
             }
-            return View(reservation);
+            return View(res);
         }
 
         // POST: Reservations/Edit/5
@@ -81,28 +101,35 @@ namespace AirlineManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ReservationId,From,Destination,DateFrom,DateTo,FlighType,NoChildren,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Reservation reservation)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(reservation).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    reservation.LastModifiedByUserId = User.Identity.GetUserId();
+                    reservation.LastModifiedOnDate = DateTime.Now;
+                    reservationRepository.UpdateReservation(reservation);
+                    reservationRepository.Save();
+
+                    return RedirectToAction("Index");
+                }
             }
+            catch (DataException)
+            {
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+            }
+            
             return View(reservation);
         }
 
         // GET: Reservations/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Reservation reservation = db.Reservation.Find(id);
-            if (reservation == null)
+            Reservation res = reservationRepository.GetReservationById(id);
+            if (res == null)
             {
                 return HttpNotFound();
             }
-            return View(reservation);
+            return View(res);
         }
 
         // POST: Reservations/Delete/5
@@ -110,18 +137,23 @@ namespace AirlineManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Reservation reservation = db.Reservation.Find(id);
-            db.Reservation.Remove(reservation);
-            db.SaveChanges();
+            try
+            {
+                Reservation reservation = reservationRepository.GetReservationById(id);
+                reservationRepository.DeleteReservation(id);
+                reservationRepository.Save();
+            }
+            catch (DataException)
+            {
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            } 
+
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            reservationRepository.Dispose();
             base.Dispose(disposing);
         }
     }

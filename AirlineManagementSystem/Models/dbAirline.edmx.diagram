@@ -9,16 +9,18 @@
         <EntityTypeShape EntityType="dbAirlineModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="dbAirlineModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbAirlineModel.AspNetUsers" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbAirlineModel.Companies" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <AssociationConnector Association="dbAirlineModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="dbAirlineModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="dbAirlineModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="dbAirlineModel.Flights" Width="1.5" PointX="3" PointY="6.125" />
-        <EntityTypeShape EntityType="dbAirlineModel.Statuses" Width="1.5" PointX="0.75" PointY="10.875" />
+        <EntityTypeShape EntityType="dbAirlineModel.Reservation" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="dbAirlineModel.Cities" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="dbAirlineModel.Companies" Width="1.5" PointX="3" PointY="7.5" />
+        <EntityTypeShape EntityType="dbAirlineModel.Country" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="dbAirlineModel.Flights" Width="1.5" PointX="5.25" PointY="7" />
+        <EntityTypeShape EntityType="dbAirlineModel.Statuses" Width="1.5" PointX="3" PointY="11.75" />
+        <AssociationConnector Association="dbAirlineModel.FK_Companies_Country" />
         <AssociationConnector Association="dbAirlineModel.FK_Flights_Companies" />
         <AssociationConnector Association="dbAirlineModel.FK_Flights_Statuses" />
-        <EntityTypeShape EntityType="dbAirlineModel.Cities" Width="1.5" PointX="5.375" PointY="6.75" />
-        <EntityTypeShape EntityType="dbAirlineModel.Reservation" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
