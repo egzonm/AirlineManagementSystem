@@ -4,34 +4,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
+<h3>All Countries</h3> 
+<hr />
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href='@Url.Action("Create", "Countries")' class="btn btn-success">Register Country</a>
+    } 
 </p>
-<table class="table">
-    <tr>
+
+<table class="table table-bordered table-hover">
+    <tr style="background-color:#333333; color:white;">
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedOnDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastModifiedOnDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedByUserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastModifiedByUserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
+        </th> 
         <th></th>
     </tr>
 
@@ -42,26 +31,14 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
-        </td>
+        </td> 
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedOnDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastModifiedOnDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedByUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastModifiedByUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CountryId }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.CountryId }) |
             @Html.ActionLink("Details", "Details", new { id=item.CountryId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CountryId })
+            @Html.ActionLink("Delete", "Delete", new { id=item.CountryId })*@
+
+            @Html.ActionLink("Edit", "Edit", new { id = item.CountryId }, new { @class = "btn btn-warning btn-sm" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.CountryId }, new { @class = "btn btn-danger btn-sm" })
         </td>
     </tr>
 }

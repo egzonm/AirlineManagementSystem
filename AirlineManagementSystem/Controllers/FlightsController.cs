@@ -29,6 +29,18 @@ namespace AirlineManagementSystem.Controllers
             return View(flightRepository.GetFlights());
         }
 
+        // GET: Flight Arrivals
+        public ActionResult _Arrivals()
+        {
+            return View(flightRepository.GetFlights().Where(a => a.FlightType == "Arrivals"));
+        }
+
+        // GET: Flight Departures
+        public ActionResult _Departures()
+        {
+            return View(flightRepository.GetFlights().Where(a => a.FlightType == "Departures"));
+        }
+
         //// GET: Flights/Details/5
         //public ActionResult Details(int? id)
         //{
@@ -45,6 +57,7 @@ namespace AirlineManagementSystem.Controllers
         //}
 
         // GET: Flights/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.CompanyId = new SelectList(db.Companies, "Id", "Name");

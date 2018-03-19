@@ -8,7 +8,10 @@
 <hr />
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
-    <a href='@Url.Action("Create", "Flights")' class="btn btn-success">Register</a>
+    @if (User.Identity.IsAuthenticated)
+    { 
+        <a href='@Url.Action("Create", "Flights")' class="btn btn-success">Register Flight</a>
+    } 
 </p>
 <table class="table table-bordered table-hover">
     <tr style="background-color:#333333; color:white;">

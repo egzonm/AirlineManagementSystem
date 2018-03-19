@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using AirlineManagementSystem.Models;
 using AirlineManagementSystem.Repositories;
+using Microsoft.AspNet.Identity;
 
 namespace AirlineManagementSystem.Controllers
 {
@@ -24,27 +20,25 @@ namespace AirlineManagementSystem.Controllers
         }
 
         // GET: Countries
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.Country.ToList());
+            return View(countryRepository.GetCountry());
         }
 
         // GET: Countries/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Country country = db.Country.Find(id);
-            if (country == null)
-            {
-                return HttpNotFound();
-            }
-            return View(country);
-        }
+        //public ActionResult Details(int id)
+        //{ 
+        //    Country country = countryRepository.GetCountryById(id);
+        //    if (country == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(country);
+        //}
 
         // GET: Countries/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -57,24 +51,33 @@ namespace AirlineManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CountryId,Name,Description,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Country country)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Country.Add(country);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    country.CreatedByUserId = User.Identity.GetUserId();
+                    country.LastModifiedByUserId = User.Identity.GetUserId();
+                    country.CreatedOnDate = DateTime.Now;
+                    country.LastModifiedOnDate = DateTime.Now;
+                    country.IsDeleted = false;
+                    countryRepository.InsertCountry(country);
+                    countryRepository.Save();
 
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+            }
+            
             return View(country);
         }
 
         // GET: Countries/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Country country = db.Country.Find(id);
+            Country country = countryRepository.GetCountryById(id);
             if (country == null)
             {
                 return HttpNotFound();
@@ -89,23 +92,29 @@ namespace AirlineManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CountryId,Name,Description,CreatedOnDate,LastModifiedOnDate,CreatedByUserId,LastModifiedByUserId,IsDeleted")] Country country)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(country).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    country.LastModifiedByUserId = User.Identity.GetUserId();
+                    country.LastModifiedOnDate = DateTime.Now;
+                    countryRepository.UpdateCountry(country);
+                    countryRepository.Save();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (DataException)
+            {
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again.");
+            }
+            
             return View(country);
         }
 
         // GET: Countries/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Country country = db.Country.Find(id);
+            Country country = countryRepository.GetCountryById(id);
             if (country == null)
             {
                 return HttpNotFound();
@@ -118,18 +127,23 @@ namespace AirlineManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Country country = db.Country.Find(id);
-            db.Country.Remove(country);
-            db.SaveChanges();
+            try
+            {
+                Country country = countryRepository.GetCountryById(id);
+                countryRepository.DeleteCountry(id);
+                countryRepository.Save();
+            }
+            catch (DataException)
+            {
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
+            
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            countryRepository.Dispose();
             base.Dispose(disposing);
         }
     }

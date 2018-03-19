@@ -9,8 +9,14 @@
     <p class="lead" style="color:white;">Airline Management System dolor sit amet, consectetur adipiscing elit. Nam ut pulvinar libero, ac varius nulla. Suspendisse a molestie massa. Donec dapibus dolor et porttitor egestas. </p>
     <p>@Html.ActionLink("Make Reservation","Index", "Reservations", null,new { @class = "btn btn-success btn-lg" })</p>
 </div>
+ <div style="border:solid;">
+     @{
+         Html.RenderAction("_Arrivals", "Flights");
+         Html.RenderAction("_Departures", "Flights");
+     }
+ </div>
 
- 
+<hr />
 <div class="row">
     <div class="col-md-4">
         <h2>Information</h2>
@@ -30,3 +36,4 @@
         <p><a class="btn btn-info" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+ 

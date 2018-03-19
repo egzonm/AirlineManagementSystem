@@ -1,0 +1,83 @@
+﻿@model IEnumerable<AirlineManagementSystem.Models.Flights>
+
+@{
+    ViewBag.Title = "Flights";
+    Layout = null;
+}
+
+<h3 style="text-align:center;">Flight Departures</h3>
+<hr />
+ 
+<table class="table table-bordered table-hover">
+    <tr style="background-color:#333333; color:white;">
+        <th>
+            @Html.DisplayNameFor(model => model.Flight_Nr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Companies.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Statuses.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.From)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.To)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArriveTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedTime)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.FlightType)
+        </th>*@
+        @*@if (User.Identity.IsAuthenticated)
+        {
+            <th></th>
+        }*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flight_Nr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Companies.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Statuses.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.From)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.To)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArriveTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedTime)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.FlightType)
+            </td>*@
+
+            @*@if (User.Identity.IsAuthenticated)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.FlightId }, new { @class = "btn btn-warning btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.FlightId }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            }*@
+
+        </tr>
+    }
+
+</table>
+

@@ -11,7 +11,8 @@ namespace AirlineManagementSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Companies
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +22,7 @@ namespace AirlineManagementSystem.Models
         }
     
         public int Id { get; set; }
+        [Display(Name = "Company")]
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<int> CountryId { get; set; }

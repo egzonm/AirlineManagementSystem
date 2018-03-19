@@ -8,7 +8,10 @@
 <hr />
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
-    <a href='@Url.Action("Create", "Company")' class="btn btn-success">Register</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href='@Url.Action("Create", "Company")' class="btn btn-success">Register Company</a>
+    } 
 </p>
 <table class="table table-bordered table-hover">
     <tr style="background-color:#333333; color:white;">
@@ -21,7 +24,10 @@
         <th>
             @Html.DisplayNameFor(Model => Model.Country)
         </th>
+        @if (User.Identity.IsAuthenticated)
+        {
         <th></th>
+        }
     </tr>
 
 @foreach (var item in Model) {
@@ -35,6 +41,8 @@
         <td>
             @Html.DisplayFor(Model => item.Country.Name)
         </td>
+        @if (User.Identity.IsAuthenticated)
+        {
         <td>
 
             @*<a href='@Url.Action("Edit", "Company")' class="btn btn-success" id="@item.Id">Edit</a>
@@ -42,8 +50,9 @@
             <a href='@Url.Action("Delete", "Company")' class="btn btn-success" id="@item.Id">Delete</a>*@
 
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })  
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new { @class = "btn btn-danger btn-sm" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
         </td>
+        }
     </tr>
 }
 

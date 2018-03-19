@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using AirlineManagementSystem.Models;
 using System.Data.Entity;
 
@@ -45,7 +44,7 @@ namespace AirlineManagementSystem.Repositories
 
         public void UpdateCountry(Country country)
         {
-            throw new NotImplementedException();
+            dbAirline.Entry(country).State = EntityState.Modified;
         }
 
         private bool disposed = false;

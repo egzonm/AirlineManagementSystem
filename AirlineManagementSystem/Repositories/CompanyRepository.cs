@@ -8,7 +8,7 @@ using Microsoft.AspNet.Identity;
 
 namespace AirlineManagementSystem.Repositories
 {
-    public class CompanyRepository : ICompany
+    public class CompanyRepository : DBGetId, ICompany
     {
         private dbAirlineEntities dbAirline;
 
@@ -22,10 +22,15 @@ namespace AirlineManagementSystem.Repositories
             return dbAirline.Companies.Where(a => a.IsDeleted == false).ToList();
         }
 
-        public Companies GetCompaniesById(int companyId)
+        public override Companies GetCompaniesById(int companyId)
         {
             return dbAirline.Companies.Find(companyId);
         }
+
+        //public Companies GetCompaniesById(int companyId)
+        //{
+        //    return dbAirline.Companies.Find(companyId);
+        //}
 
         public void InsertCompany(Companies comp)
         { 
@@ -68,5 +73,7 @@ namespace AirlineManagementSystem.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+    
     }
 }

@@ -25,7 +25,7 @@ namespace AirlineManagementSystem.Controllers
         }
 
         // GET: Company
-        [Authorize]
+       
         public ActionResult Index()
         {
             return View(companyRepository.GetCompany()); 
@@ -44,6 +44,7 @@ namespace AirlineManagementSystem.Controllers
         //}
 
         //GET: Company/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.CountryId = new SelectList(db.Country, "CountryId", "Name");

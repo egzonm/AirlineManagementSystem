@@ -24,6 +24,7 @@ namespace AirlineManagementSystem.Controllers
         }
 
         // GET: Cities
+        [Authorize]
         public ActionResult Index()
         {
             return View(cityRepository.GetCity());
@@ -45,6 +46,7 @@ namespace AirlineManagementSystem.Controllers
         //}
 
         // GET: Cities/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();

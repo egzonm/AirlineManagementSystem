@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using AirlineManagementSystem.Models;
 using AirlineManagementSystem.Repositories;
 using Microsoft.AspNet.Identity;
+using System.Linq;
 
 namespace AirlineManagementSystem.Controllers
 {
     public class ReservationsController : Controller
     {
-        //private dbAirlineEntities db = new dbAirlineEntities();
+        private dbAirlineEntities db = new dbAirlineEntities();
 
         private IReservation reservationRepository;
-
+         
 
         public ReservationsController()
         {
@@ -25,8 +21,9 @@ namespace AirlineManagementSystem.Controllers
         } 
 
         // GET: Reservations
+        [Authorize]
         public ActionResult Index()
-        {
+        { 
             return View(reservationRepository.GetReservation());
         }
 
@@ -46,6 +43,7 @@ namespace AirlineManagementSystem.Controllers
         //}
 
         // GET: Reservations/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();

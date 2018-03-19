@@ -7,8 +7,11 @@
   
 <h3>All Reservations</h3>
  <hr />
-    <p>  
-        <a href='@Url.Action("Create", "Reservations")' class="btn btn-success">Register</a>
+    <p> 
+        @if (User.Identity.IsAuthenticated)
+        { 
+            <a href='@Url.Action("Create", "Reservations")' class="btn btn-success">Register Reservation</a>
+        }
     </p>
     <table class="table table-bordered table-hover">
         <tr style="background-color:#333333; color:white;">
@@ -30,7 +33,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.NoChildren)
             </th> 
+            @if (User.Identity.IsAuthenticated)
+            {   
             <th></th>
+            }
         </tr>
     
     @foreach (var item in Model) {
@@ -54,10 +60,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NoChildren)
             </td> 
+            @if (User.Identity.IsAuthenticated)
+            {
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ReservationId }, new { @class = "btn btn-warning btn-sm" })
                 @Html.ActionLink("Delete", "Delete", new { id = item.ReservationId }, new { @class = "btn btn-danger btn-sm" })
             </td>
+             }
         </tr>
     }
     

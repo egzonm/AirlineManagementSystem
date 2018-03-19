@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirlineManagementSystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,12 @@ namespace AirlineManagementSystem.Controllers
     {
         public ActionResult Index()
         {
-            
+            LayoutDetails details;
+            details.name = "Airline Management System";
+            details.email = "airline@info.com";
+            details.telephone = "044849130";
+            ViewBag.DetailsForPage = details.name +" "+ details.email +" "+ details.telephone;
+
             return View();
         }
 

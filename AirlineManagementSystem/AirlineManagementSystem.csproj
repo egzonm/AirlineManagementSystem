@@ -244,8 +244,10 @@
       <DependentUpon>dbAirline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LayoutDetails.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NoChildren.cs" />
+    <Compile Include="Models\RequireAttribute.cs" />
     <Compile Include="Models\Reservation.cs">
       <DependentUpon>dbAirline.tt</DependentUpon>
     </Compile>
@@ -263,6 +265,7 @@
     <Compile Include="Repositories\IFlight.cs" />
     <Compile Include="Repositories\IReservation.cs" />
     <Compile Include="Repositories\ReservationRepository.cs" />
+    <Compile Include="Repositories\DBGetId.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -368,6 +371,8 @@
     <Content Include="Views\Countries\Details.cshtml" />
     <Content Include="Views\Countries\Edit.cshtml" />
     <Content Include="Views\Countries\Index.cshtml" />
+    <Content Include="Views\Flights\_Arrivals.cshtml" />
+    <Content Include="Views\Flights\_Departures.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
