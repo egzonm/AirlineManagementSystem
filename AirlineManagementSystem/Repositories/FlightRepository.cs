@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using AirlineManagementSystem.Models;
 using System.Data.Entity;
 
@@ -9,7 +8,6 @@ namespace AirlineManagementSystem.Repositories
 {
     public class FlightRepository : IFlight
     {
-
         private dbAirlineEntities dbAirline;
 
         public FlightRepository(dbAirlineEntities dbAirline)
@@ -20,7 +18,8 @@ namespace AirlineManagementSystem.Repositories
         public IEnumerable<Flights> GetFlights()
         {
             //var flights = dbAirline.Flights.Include(f => f.Companies).Include(f => f.Statuses);
-            return dbAirline.Flights.Where(a => a.IsDeleted == false).Include(f => f.Companies).Include(f => f.Statuses).ToList();
+            //return dbAirline.Flights.Where(a => a.IsDeleted == false).Include(f => f.Companies).Include(f => f.Statuses).ToList();
+            return dbAirline.Flights.Where(a => a.IsDeleted == false).ToList();
         }
 
         public Flights GetFlightById(int flightId)

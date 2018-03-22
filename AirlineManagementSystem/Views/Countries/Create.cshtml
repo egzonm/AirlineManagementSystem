@@ -4,11 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h3>Register Country</h3>
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-<div class="alert alert-success" style="display:none;">
-    <strong>Success!</strong> Data saved successfully!
-</div>
+<h3>Register Country</h3> 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "companyRegister" })) 
 {
     @Html.AntiForgeryToken()
@@ -39,11 +35,5 @@
                 <a href='@Url.Action("Index", "Countries")' class="btn btn-primary">Back</a>
             </div>
         </div>
-    </div>
-
-  
-
-    <script>   
-       
-    </script>
+    </div> 
 } 

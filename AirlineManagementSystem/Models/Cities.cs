@@ -11,11 +11,13 @@ namespace AirlineManagementSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Cities
     {
         public int CityId { get; set; }
         public string Name { get; set; }
+        [Display(Name = "Airport Name")]
         public string Airport_Name { get; set; }
         public string Country { get; set; }
         public Nullable<System.DateTime> CreatedOnDate { get; set; }

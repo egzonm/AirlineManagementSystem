@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AirlineManagementSystem.Controllers.AccountController">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="AirlineManagementSystem.Controllers.AccountController.ChallengeResult" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\AccountController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAChACAQAAAAAAFgEgAABAABMKICAAMRAAQgAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirlineManagementSystem.Controllers.CitiesController">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAACAAAAAAAEAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\CitiesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirlineManagementSystem.Controllers.CompanyController">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAACAAAAAAAAAAAEAAEACAAkAAAAAAAA=</HashCode>
+      <FileName>Controllers\CompanyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirlineManagementSystem.Controllers.CountriesController">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAACAAAAAAAEAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\CountriesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirlineManagementSystem.Controllers.FlightsController">
+    <Position X="2.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQQACAAAAAAAAAAAEAAEACAAEAAAAAEAI=</HashCode>
+      <FileName>Controllers\FlightsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirlineManagementSystem.Controllers.HomeController">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEACAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirlineManagementSystem.Controllers.ManageController">
+    <Position X="6.5" Y="4" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="AirlineManagementSystem.Controllers.ManageController.ManageMessageId" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\ManageController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABACAQiAAgAAAAEFhAAAAAAEAIMIAAEEEgAAkAAA=</HashCode>
+      <FileName>Controllers\ManageController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirlineManagementSystem.Controllers.ReservationsController">
+    <Position X="4.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAACAQAACAAAAAAAAAAAEAAEACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ReservationsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirlineManagementSystem.Repositories.CityRepository">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIgAACAAAAIIAAAAAQAAAAAAAAgAAAAAABAAAAA=</HashCode>
+      <FileName>Repositories\CityRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AirlineManagementSystem.Repositories.CompanyRepository">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAACAAQAAAAAQAAQAAAAAAAAEAQAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\CompanyRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AirlineManagementSystem.Repositories.CountryRepository">
+    <Position X="10.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIBCIAAACAIAAAAAAAAAQAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\CountryRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AirlineManagementSystem.Repositories.DBGetId">
+    <Position X="8.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\DBGetId.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirlineManagementSystem.Repositories.FlightRepository">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIACQCAAAAACEAAAAQAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\FlightRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AirlineManagementSystem.Repositories.ReservationRepository">
+    <Position X="8.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAACAAABAAUAAAARAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\ReservationRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="AirlineManagementSystem.Repositories.IFlight">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIACQCAAAAACEAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IFlight.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AirlineManagementSystem.Repositories.ICity">
+    <Position X="12.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIgAACAAAAIIAAAAAAAAAAAAAAgAAAAAABAAAAA=</HashCode>
+      <FileName>Repositories\ICity.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AirlineManagementSystem.Repositories.ICompany">
+    <Position X="14" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAACAAQAAAAAQAAQAAAAAAAAEAQAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\ICompany.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AirlineManagementSystem.Repositories.ICountry">
+    <Position X="14" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABCIAAACAIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\ICountry.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AirlineManagementSystem.Repositories.IReservation">
+    <Position X="12.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAACAAABAAUAAAABAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IReservation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
